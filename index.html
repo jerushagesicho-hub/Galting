@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petal &amp; Star – my sparkle diary</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap">
+<style>
+:root{--bg1:#ffe3f0;--bg2:#efd9ff;--card:#fffafcf0;--ink:#4a1d4a;--soft:#8a5a8a;--rose:#f472b6;--orchid:#c084fc;--gold:#f5b942;--mint:#7ee0c3;--line:#f6c7e0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1030;--bg2:#1c1240;--card:#3a1b4aea;--ink:#ffeaf6;--soft:#d9b0e6;--line:#6b3a80}}
+:root[data-theme="dark"]{--bg1:#2a1030;--bg2:#1c1240;--card:#3a1b4aea;--ink:#ffeaf6;--soft:#d9b0e6;--line:#6b3a80}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:'Quicksand',system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;min-height:100vh;overflow-x:hidden}
+h1,h2{font-family:'Pacifico','Brush Script MT',cursive;font-weight:400;margin:0}
+#fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+#fx i{position:absolute;bottom:-40px;font-style:normal;animation:up linear infinite;opacity:.8}
+@keyframes up{to{transform:translateY(-115vh) rotate(360deg)}}
+.tw{position:absolute;color:var(--gold);animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{transform:scale(.4);opacity:.3}}
+header,main,nav{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:12px 16px}
+header{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px}
+header h1{font-size:clamp(28px,6vw,46px);color:var(--rose);text-shadow:0 0 14px #fff8,0 0 2px var(--orchid)}
+header p{margin:2px 0 0;color:var(--soft)}
+.girl{width:min(34vw,170px);animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 6px 10px #c084fc66)}
+@keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
+.arm{transform-origin:150px 130px;animation:wave 1.2s ease-in-out infinite}
+@keyframes wave{50%{transform:rotate(-24deg)}}
+.hair{transform-origin:100px 60px;animation:sway 3s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(-2deg)}}
+.blink{animation:bl 4s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes bl{94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+nav button{flex:none;border:2px solid var(--line);background:var(--card);color:var(--ink);font:700 15px 'Quicksand',sans-serif;padding:9px 16px;border-radius:99px;cursor:pointer}
+nav button[aria-selected=true]{background:linear-gradient(135deg,var(--rose),var(--orchid));color:#fff;border-color:transparent;box-shadow:0 0 16px #f472b680}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--orchid);outline-offset:2px}
+.pg{display:none}.pg.on{display:block}
+.card{background:var(--card);border:2px solid var(--line);border-radius:26px 26px 26px 8px;padding:18px;margin:0 0 14px;box-shadow:0 8px 24px #c084fc30}
+.card h2{font-size:24px;color:var(--rose);margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.big{font-size:38px;font-weight:700}.sub{color:var(--soft);font-size:14px}
+.btn{border:0;background:linear-gradient(135deg,var(--rose),var(--orchid));color:#fff;font:700 15px 'Quicksand',sans-serif;padding:10px 18px;border-radius:99px;cursor:pointer;margin:4px 4px 0 0;box-shadow:0 4px 12px #f472b655;transition:transform .15s}
+.btn:active{transform:scale(.94)}
+textarea,input{width:100%;font:500 16px 'Quicksand',sans-serif;color:var(--ink);background:#fff7;border:2px solid var(--line);border-radius:16px;padding:10px;margin:4px 0}
+textarea{min-height:110px;resize:vertical;background-image:repeating-linear-gradient(transparent 0 27px,var(--line) 28px);line-height:28px}
+.moods{display:flex;gap:8px;flex-wrap:wrap}
+.moods button{font-size:34px;background:var(--card);border:3px solid var(--line);border-radius:50%;width:62px;height:62px;cursor:pointer;transition:transform .2s}
+.moods button:hover{transform:rotate(-8deg) scale(1.1)}.moods button.sel{border-color:var(--rose);box-shadow:0 0 16px var(--rose);animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.25)}}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal b{font-size:12px;color:var(--soft)}
+.cal div{aspect-ratio:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;border:2px solid transparent;cursor:pointer;background:#fff4}
+.cal .p{background:#f472b6;color:#fff}.cal .pr{background:repeating-linear-gradient(45deg,#fbcfe8,#fbcfe8 4px,#fff 4px 8px)}
+.cal .f{background:#c7f4e6;color:#064}.cal .t{border-color:var(--gold);box-shadow:0 0 10px var(--gold)}
+.cal span{font-size:13px;line-height:1}
+.ring{width:170px;height:170px;display:block;margin:0 auto}
+.bars{display:flex;align-items:flex-end;gap:8px;height:110px;margin-top:10px}
+.bars div{flex:1;background:linear-gradient(var(--orchid),var(--rose));border-radius:10px 10px 4px 4px;min-height:4px;position:relative}
+.bars small{position:absolute;bottom:-18px;left:0;right:0;text-align:center;color:var(--soft);font-size:11px}
+.entry{border-bottom:2px dashed var(--line);padding:8px 0}.entry:last-child{border:0}
+.lv{height:16px;background:#fff6;border-radius:99px;overflow:hidden;border:2px solid var(--line)}
+.lv i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--rose));transition:width .6s}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg1);padding:10px 20px;border-radius:99px;z-index:9;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+.cal span{font-size:10px;white-space:nowrap}.cal .o{opacity:.4}.cal .s{outline:3px solid var(--orchid);outline-offset:-2px}
+.cal div:hover{background:#fff9}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="fx" aria-hidden="true"></div>
+<header>
+ <div><h1>Petal &amp; Star</h1><p id="hi">My sparkle diary</p></div>
+ <svg class="girl" viewBox="0 0 200 250" role="img" aria-label="Animated girl with a flower crown waving">
+  <g class="hair"><ellipse cx="100" cy="85" rx="62" ry="68" fill="#7a3b1e"/><rect x="40" y="85" width="26" height="90" rx="13" fill="#7a3b1e"/><rect x="134" y="85" width="26" height="90" rx="13" fill="#7a3b1e"/></g>
+  <path d="M60 250 L100 140 L140 250Z" fill="#f472b6"/><path d="M60 250 L100 140 L140 250Z" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g class="arm"><rect x="146" y="128" width="12" height="54" rx="6" fill="#ffd6b8" transform="rotate(-30 150 130)"/></g>
+  <rect x="42" y="140" width="12" height="52" rx="6" fill="#ffd6b8" transform="rotate(14 48 142)"/>
+  <circle cx="100" cy="92" r="46" fill="#ffd6b8"/>
+  <path d="M56 80 Q100 20 144 80 Q100 56 56 80Z" fill="#7a3b1e"/>
+  <g class="blink"><ellipse cx="82" cy="95" rx="6" ry="8" fill="#4a1d4a"/><ellipse cx="118" cy="95" rx="6" ry="8" fill="#4a1d4a"/></g>
+  <circle cx="84" cy="92" r="2" fill="#fff"/><circle cx="120" cy="92" r="2" fill="#fff"/>
+  <circle cx="70" cy="112" r="8" fill="#f9a8d4" opacity=".7"/><circle cx="130" cy="112" r="8" fill="#f9a8d4" opacity=".7"/>
+  <path d="M88 116 Q100 128 112 116" stroke="#c2185b" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <g><circle cx="66" cy="56" r="9" fill="#fff"/><circle cx="66" cy="56" r="4" fill="#f5b942"/><circle cx="100" cy="44" r="10" fill="#c084fc"/><circle cx="100" cy="44" r="4" fill="#f5b942"/><circle cx="134" cy="56" r="9" fill="#fff"/><circle cx="134" cy="56" r="4" fill="#f5b942"/></g>
+ </svg>
+</header>
+<nav id="tabs" role="tablist" aria-label="Sections"></nav>
+<main>
+<section class="pg on" id="p-home">
+ <div class="grid">
+  <div class="card"><h2>Today</h2><div class="big" id="hmood">–</div><div class="sub">your mood</div></div>
+  <div class="card"><h2>Steps</h2><div class="big" id="hsteps">0</div><div class="sub" id="hgoal"></div></div>
+  <div class="card"><h2>Cycle</h2><div class="big" id="hcyc">–</div><div class="sub" id="hcyc2">Log your period to see predictions.</div></div>
+  <div class="card"><h2>Sparkle score</h2><div class="big" id="hscore">0</div><div class="sub" id="hlvl"></div></div>
+ </div>
+</section>
+<section class="pg" id="p-diary"><div class="card"><h2>Dear diary…</h2>
+ <label class="sub" for="dtx">Write about your day</label><textarea id="dtx"></textarea>
+ <button class="btn" id="dsave">Save entry</button></div>
+ <div class="card"><h2>Past pages</h2><div id="dlist"></div></div></section>
+<section class="pg" id="p-cycle"><div class="card"><h2>Cycle tracker</h2>
+ <div class="grid"><div><label class="sub" for="cl">Cycle length (days)</label><input id="cl" type="number" min="20" max="45"></div>
+ <div><label class="sub" for="pl">Period length (days)</label><input id="pl" type="number" min="2" max="10"></div></div>
+ <button class="btn" id="cstart">My period started today</button><button class="btn" id="cundo">Undo last start</button>
+ <p id="cinfo" class="sub"></p><p class="sub">Predictions are estimates from your own entries, not medical advice. Talk to a doctor about irregular or painful cycles.</p></div></section>
+<section class="pg" id="p-cal"><div class="card"><h2 id="mt">Calendar</h2>
+ <button class="btn" id="pm" aria-label="Previous month">‹ Prev</button><button class="btn" id="tdy">Today</button><button class="btn" id="nm" aria-label="Next month">Next ›</button>
+ <div class="cal" id="cal" style="margin-top:10px"></div>
+ <p class="sub">Pink = period · striped = predicted · mint = fertile window · gold ring = today · 📖 diary · 📝 plans</p></div>
+ <div class="card"><h2 id="cdt">Pick a day</h2><div id="cday" class="sub"></div>
+ <label class="sub" for="ntx">Write something on this day</label><input id="ntx" placeholder="e.g. Dentist, birthday party, exam">
+ <label class="sub" for="ntm">Time (optional)</label><input id="ntm" type="time">
+ <button class="btn" id="nadd">Add to calendar</button><ul id="nl" style="list-style:none;padding:0"></ul></div></section>
+<section class="pg" id="p-mood"><div class="card"><h2>How do you feel?</h2><div class="moods" id="moods"></div>
+ <p class="sub">This week</p><div class="moods" id="mweek" style="gap:4px"></div></div></section>
+<section class="pg" id="p-steps"><div class="card"><h2>Step tracker</h2>
+ <svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="var(--line)" stroke-width="10"/><circle id="rg" cx="60" cy="60" r="54" fill="none" stroke="var(--rose)" stroke-width="10" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .8s"/><text x="60" y="66" text-anchor="middle" font-size="20" font-weight="700" fill="var(--ink)" id="rt">0</text></svg>
+ <div style="border:2px dashed var(--line);border-radius:18px;padding:12px;margin:10px 0"><b>Live step counter</b>
+ <div class="sub" id="live">Off. Uses your phone’s motion sensor. Keep this page open with the screen on.</div>
+ <button class="btn" id="lstart">Start live tracking</button><button class="btn" id="lstop" hidden>Stop</button><div class="sub" id="ldist"></div></div>
+ <label class="sub" for="sin">Or add steps by hand</label><input id="sin" type="number" min="0" placeholder="e.g. 2500">
+ <button class="btn" id="sadd">Add steps</button><button class="btn" id="sset">Set total</button>
+ <label class="sub" for="sg">Daily goal</label><input id="sg" type="number" min="1000">
+ <div class="bars" id="sbars" style="margin-bottom:22px"></div></div></section>
+<section class="pg" id="p-score"><div class="card"><h2>Scoreboard</h2>
+ <div class="big" id="sc">0</div><div class="sub" id="sl"></div><div class="lv"><i id="sbar"></i></div>
+ <p class="sub">Earn points: diary page +10 · mood +5 · steps goal +20 · every 1,000 steps +1</p>
+ <div class="grid"><div class="card"><div class="big" id="stk">0</div><div class="sub">day streak</div></div><div class="card"><div class="big" id="sbest">0</div><div class="sub">best step day</div></div></div></div></section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),LK='petal.star.v1';
+let db={diary:{},notes:{},mood:{},steps:{},starts:[],len:28,plen:5,goal:8000};
+try{Object.assign(db,JSON.parse(localStorage.getItem(LK)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(LK,JSON.stringify(db))}catch(e){}};
+const n2d=n=>new Date(n*864e5).toISOString().slice(0,10),d2n=s=>Math.floor(Date.parse(s+'T00:00:00Z')/864e5);
+const TD=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10),T=d2n(TD);
+const MO=['😢','😕','😐','🙂','🤩'],ML=['Sad','Meh','Okay','Happy','Sparkling'];
+const esc=s=>String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1800)}
+/* tabs */
+const TABS=[['home','Home'],['diary','Diary'],['cycle','Cycle'],['cal','Calendar'],['mood','Mood'],['steps','Steps'],['score','Scores']];
+$('#tabs').innerHTML=TABS.map(([i,t])=>`<button role="tab" data-t="${i}" aria-selected="${i==='home'}">${t}</button>`).join('');
+$('#tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;
+ document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.t));
+ document.querySelectorAll('#tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));render()};
+/* cycle maths */
+function cyc(){const s=db.starts.length?d2n(db.starts[db.starts.length-1]):null;if(s===null)return null;
+ const L=+db.len||28,P=+db.plen||5,day=((T-s)%L+L)%L+1,next=s+L*Math.ceil((T-s+1)/L||1),ov=next-14;
+ const ph=day<=P?'Period':(day>=L-14-1&&day<=L-14+1)?'Ovulation':day<L-14?'Follicular':'Luteal';
+ return{s,L,P,day,next,ov,ph}}
+function dayType(n){const c=cyc();let t='';if(!c)return t;
+ for(const st of db.starts){const a=d2n(st);if(n>=a&&n<a+(+db.plen||5))t='p'}
+ if(!t&&n>c.s){const k=Math.floor((n-c.s)/c.L),o=(n-c.s)%c.L;if(o<c.P&&n>T)t='pr';else if(o>=c.L-19&&o<=c.L-13)t='f'}
+ return t}
+/* score */
+const pts=d=>(db.diary[d]?10:0)+(db.mood[d]!=null?5:0)+((db.steps[d]||0)>=db.goal?20:0)+Math.floor((db.steps[d]||0)/1000);
+function score(){const days=new Set([...Object.keys(db.diary),...Object.keys(db.mood),...Object.keys(db.steps)]);
+ let tot=0;days.forEach(d=>tot+=pts(d));let k=0,n=T;if(!days.has(n2d(n)))n--;while(days.has(n2d(n))){k++;n--}
+ const L=[[0,'Seedling 🌱'],[100,'Bud 🌷'],[300,'Blossom 🌸'],[600,'Star ✨']];let i=0;L.forEach((l,j)=>{if(tot>=l[0])i=j});
+ const nx=L[i+1];return{tot,k,lv:L[i][1],pct:nx?(tot-L[i][0])/(nx[0]-L[i][0])*100:100,nx}}
+/* render */
+function render(){
+ const sc=score(),st=db.steps[TD]||0,c=cyc();
+ $('#hmood').textContent=db.mood[TD]!=null?MO[db.mood[TD]]+' '+ML[db.mood[TD]]:'Not set';
+ $('#hsteps').textContent=st.toLocaleString();$('#hgoal').textContent='goal '+(+db.goal).toLocaleString();
+ $('#hscore').textContent=sc.tot;$('#hlvl').textContent=sc.lv+' · '+sc.k+' day streak';
+ if(c){$('#hcyc').textContent='Day '+c.day;$('#hcyc2').textContent=c.ph+' phase · next period ~'+n2d(c.next).slice(5)}
+ $('#cl').value=db.len;$('#pl').value=db.plen;$('#sg').value=db.goal;
+ $('#cinfo').textContent=c?`Day ${c.day} of ${c.L} · ${c.ph} phase. Next period around ${n2d(c.next)}. Estimated ovulation around ${n2d(c.ov)}.`:'No periods logged yet. Tap the button on the first day of your period.';
+ $('#dlist').innerHTML=Object.keys(db.diary).sort().reverse().map(d=>`<div class="entry"><b>${d} ${db.mood[d]!=null?MO[db.mood[d]]:''}</b><br>${esc(db.diary[d]).replace(/\n/g,'<br>')}</div>`).join('')||'<span class="sub">Your first page is waiting ✨</span>';
+ $('#moods').innerHTML=MO.map((m,i)=>`<button data-m="${i}" class="${db.mood[TD]===i?'sel':''}" aria-label="${ML[i]}" title="${ML[i]}">${m}</button>`).join('');
+ $('#mweek').innerHTML=[6,5,4,3,2,1,0].map(k=>{const d=n2d(T-k);return `<div style="text-align:center"><div style="font-size:26px">${db.mood[d]!=null?MO[db.mood[d]]:'·'}</div><small class="sub">${d.slice(8)}</small></div>`}).join('');
+ const p=Math.min(1,st/db.goal);$('#rg').style.strokeDashoffset=339.3*(1-p);$('#rt').textContent=st.toLocaleString();
+ const wk=[6,5,4,3,2,1,0].map(k=>[n2d(T-k),db.steps[n2d(T-k)]||0]),mx=Math.max(db.goal,...wk.map(x=>x[1]));
+ $('#sbars').innerHTML=wk.map(([d,v])=>`<div style="height:${Math.max(4,v/mx*100)}%" title="${v}"><small>${d.slice(8)}</small></div>`).join('');
+ $('#sc').textContent=sc.tot+' pts';$('#sl').textContent=sc.lv+(sc.nx?' → next: '+sc.nx[1]:' (top level!)');$('#sbar').style.width=sc.pct+'%';
+ $('#stk').textContent=sc.k;$('#sbest').textContent=Math.max(0,...Object.values(db.steps)).toLocaleString();
+ calRender()}
+let cm=new Date(TD+'T00:00:00Z');cm.setUTCDate(1);
+let sel=TD;
+function calRender(){const y=cm.getUTCFullYear(),m=cm.getUTCMonth(),f=cm.getUTCDay(),dim=new Date(Date.UTC(y,m+1,0)).getUTCDate();
+ $('#mt').textContent=cm.toLocaleString('en',{month:'long',year:'numeric',timeZone:'UTC'});
+ let h=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(x=>`<b>${x}</b>`).join('');
+ const first=Date.UTC(y,m,1)/864e5-f,cells=Math.ceil((f+dim)/7)*7,mk=n2d(Date.UTC(y,m,1)/864e5).slice(0,7);
+ for(let i=0;i<cells;i++){const n=first+i,ds=n2d(n),t=dayType(n),nt=(db.notes[ds]||[]).length;
+  const ic=(db.mood[ds]!=null?MO[db.mood[ds]]:'')+(db.diary[ds]?'📖':'')+(nt?'📝':'');
+  h+=`<div class="${t} ${ds===TD?'t':''} ${ds.slice(0,7)!==mk?'o':''} ${ds===sel?'s':''}" data-d="${ds}" tabindex="0" role="button" aria-label="${ds}">${+ds.slice(8)}<span>${ic}</span></div>`}
+ $('#cal').innerHTML=h;dayPanel()}
+function dayPanel(){$('#cdt').textContent=new Date(sel+'T00:00:00Z').toLocaleDateString('en',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+ $('#cday').innerHTML=db.diary[sel]?'📖 '+esc(db.diary[sel]):'No diary page for this day.';
+ $('#nl').innerHTML=(db.notes[sel]||[]).map((x,i)=>`<li class="entry">${x.tm?'<b>'+x.tm+'</b> ':''}${esc(x.t)} <button class="btn" data-x="${i}" aria-label="Delete note">✕</button></li>`).join('')||'<li class="sub">Nothing planned yet. Add something above.</li>'}
+$('#cal').onclick=e=>{const d=e.target.closest('[data-d]');if(!d)return;sel=d.dataset.d;const n=new Date(sel+'T00:00:00Z');if(n.getUTCMonth()!==cm.getUTCMonth())cm=new Date(Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),1));calRender()};
+$('#cal').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.target.click()}};
+$('#pm').onclick=()=>{cm.setUTCMonth(cm.getUTCMonth()-1);calRender()};$('#nm').onclick=()=>{cm.setUTCMonth(cm.getUTCMonth()+1);calRender()};
+$('#tdy').onclick=()=>{cm=new Date(TD+'T00:00:00Z');cm.setUTCDate(1);sel=TD;calRender()};
+$('#nadd').onclick=()=>{const t=$('#ntx').value.trim();if(!t)return toast('Write something to add');(db.notes[sel]=db.notes[sel]||[]).push({t,tm:$('#ntm').value});db.notes[sel].sort((a,b)=>(a.tm||'99').localeCompare(b.tm||'99'));$('#ntx').value='';$('#ntm').value='';save();calRender();toast('Added to your calendar')};
+$('#nl').onclick=e=>{const b=e.target.closest('[data-x]');if(!b)return;db.notes[sel].splice(+b.dataset.x,1);if(!db.notes[sel].length)delete db.notes[sel];save();calRender()};
+/* actions */
+$('#dtx').value=db.diary[TD]||'';
+$('#dsave').onclick=()=>{const v=$('#dtx').value.trim();if(!v)return toast('Write a few words first');db.diary[TD]=v;save();render();toast('Page saved ✨')};
+$('#moods').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;db.mood[TD]=+b.dataset.m;save();render();toast('Mood saved')};
+$('#sadd').onclick=()=>{const v=+$('#sin').value;if(!(v>0))return toast('Enter a number of steps');db.steps[TD]=(db.steps[TD]||0)+v;$('#sin').value='';save();render();toast(db.steps[TD]>=db.goal?'Goal reached! 🎉':'Steps added')};
+$('#sset').onclick=()=>{const v=+$('#sin').value;if(!(v>=0)||$('#sin').value==='')return toast('Enter a number of steps');db.steps[TD]=v;save();render();toast('Steps updated')};
+$('#sg').onchange=e=>{db.goal=Math.max(1000,+e.target.value||8000);save();render()};
+$('#cl').onchange=e=>{db.len=Math.min(45,Math.max(20,+e.target.value||28));save();render()};
+$('#pl').onchange=e=>{db.plen=Math.min(10,Math.max(2,+e.target.value||5));save();render()};
+$('#cstart').onclick=()=>{if(!db.starts.includes(TD))db.starts.push(TD);db.starts.sort();save();render();toast('Period start logged 🌸')};
+$('#cundo').onclick=()=>{db.starts.pop();save();render();toast('Last start removed')};
+const h=new Date().getHours();$('#hi').textContent=(h<12?'Good morning':h<18?'Good afternoon':'Good evening')+', gorgeous ✨';
+/* live step counter (phone motion sensor) */
+let live=null,ss=0,wl=null;
+function liveUI(){const st=db.steps[TD]||0;$('#rt').textContent=st.toLocaleString();$('#rg').style.strokeDashoffset=339.3*(1-Math.min(1,st/db.goal));$('#hsteps').textContent=st.toLocaleString();$('#live').textContent='Counting live · '+ss+' steps this session';$('#ldist').textContent='About '+(st*.75/1000).toFixed(2)+' km today (estimate at 0.75 m per step)'}
+async function lock(){try{wl=await navigator.wakeLock.request('screen')}catch(e){}}
+function stepGo(){let g=9.8,sm=0,prev=0,last=0,got=false;
+ live=e=>{const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;got=true;
+  const m=Math.hypot(a.x,a.y,a.z);g=g*.98+m*.02;sm=sm*.7+(m-g)*.3;const t=Date.now();
+  if(sm>1.1&&prev<=1.1&&t-last>300){last=t;ss++;db.steps[TD]=(db.steps[TD]||0)+1;if(ss%5===0)save();liveUI()}prev=sm};
+ addEventListener('devicemotion',live);lock();
+ $('#lstart').hidden=true;$('#lstop').hidden=false;$('#live').textContent='Counting live · walk with your phone in your hand or pocket';
+ setTimeout(()=>{if(live&&!got){$('#live').textContent='No motion sensor found. Open this page on your phone, then try again.'}},3000)}
+$('#lstart').onclick=()=>{if(typeof DeviceMotionEvent==='undefined')return toast('This device has no motion sensor');
+ if(typeof DeviceMotionEvent.requestPermission==='function')DeviceMotionEvent.requestPermission().then(r=>r==='granted'?stepGo():toast('Motion access was denied')).catch(()=>toast('Could not ask for motion access'));else stepGo()};
+$('#lstop').onclick=()=>{if(live)removeEventListener('devicemotion',live);live=null;try{wl&&wl.release()}catch(e){}save();$('#lstart').hidden=false;$('#lstop').hidden=true;$('#live').textContent='Stopped · '+ss+' steps counted this session';render();toast('Live tracking stopped')};
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save();else if(live)lock()});
+/* floating flowers, stars, glitter */
+const fx=$('#fx');['🌸','🌷','🌼','✨','⭐','💖','🦋'].forEach((e,k)=>{for(let i=0;i<3;i++){const s=document.createElement('i');s.textContent=e;
+ s.style.cssText=`left:${Math.random()*100}%;font-size:${14+Math.random()*18}px;animation-duration:${14+Math.random()*16}s;animation-delay:${-Math.random()*30}s`;fx.appendChild(s)}});
+for(let i=0;i<26;i++){const s=document.createElement('span');s.className='tw';s.textContent='✦';
+ s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${8+Math.random()*12}px;animation-delay:${Math.random()*2.4}s`;fx.appendChild(s)}
+render();
+</script></body></html>
